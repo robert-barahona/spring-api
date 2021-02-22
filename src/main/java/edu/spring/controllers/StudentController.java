@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import edu.spring.model.Student;
 import edu.spring.services.IServiceStudent;
+import edu.spring.services.ServiceStudent;
 
 @RestController
 @RequestMapping("/api/student")
@@ -15,6 +16,18 @@ public class StudentController {
 	
 	@Autowired
 	private IServiceStudent service;
+	
+	public StudentController(IServiceStudent custDataAccess) {
+		service = custDataAccess;
+	}
+	
+	public void setCustomerDataAccess(IServiceStudent custDataAccess) {
+		service = custDataAccess;
+	}
+	
+	public StudentController() {
+		service = new ServiceStudent();
+	}
 	
 	@GetMapping("")
 	public List<Student> findAll(){
@@ -29,7 +42,7 @@ public class StudentController {
 	}
 	
 	@GetMapping("/{id}")
-	public Student retrieve(@PathVariable(value="id") Long id) {
+	public Student findById(@PathVariable(value="id") Long id) {
 		return service.findById(id);
 	}
 	
