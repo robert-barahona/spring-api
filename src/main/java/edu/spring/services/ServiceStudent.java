@@ -22,7 +22,6 @@ public class ServiceStudent implements IServiceStudent {
 
 	@Override
 	public Student findById(Long id) {
-		// TODO Auto-generated method stub
 		return dao.findById(id).get();
 	}
 
